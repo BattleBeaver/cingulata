@@ -1,7 +1,8 @@
 (function() {
   var gallery = document.querySelector(".products-grid");
+
   window.addEventListener("load", function() {
-    cng.item.load();
+    cng.item.load({});
   });
 
   cng.item = {};
@@ -9,10 +10,23 @@
   /**
    * Loading items into grid.
    */
-  cng.item.load = function() {
-    cng.ajax.get("/item/find", function(xhr) {
-      createList(xhr.response)
-    })
+  cng.item.load = function(query) {
+    gallery.innerHTML = "";
+    $.ajax({
+      contentType: 'application/json',
+      data: JSON.stringify(query),
+      dataType: 'json',
+      success: function(data){
+          createList(JSON.stringify(data));
+      },
+      error: function(){
+          console.error("Error cng.item.load");
+      },
+      processData: false,
+      type: 'POST',
+      url: '/item/find'
+    });
+
   }
 
   function isEmpty(obj) {
@@ -181,6 +195,80 @@
       $(itemLi).fadeIn(400);
     });
   }
+}());
+
+/**
+* Filters
+*/
+(function() {
+
+  //creates a block for refreshing gallery.
+  function createRefreshBlock() {
+    var refreshBlock = {
+      obj : null,
+
+      display : function() {
+        this.obj.style.display = "block";
+      },
+
+      hide : function() {
+        this.obj.style.display = "none";
+      },
+
+      moveTo : function(obj) {
+        obj = obj.labels ? obj.labels[0] : obj;
+        var _coordinates = obj.getBoundingClientRect();
+        var _top = _coordinates.top;
+        var _right = _coordinates.right;
+
+        this.obj.style.top = _top + "px";
+        this.obj.style.left = _right + 10 + "px";
+      }
+    };
+
+    refreshBlock.obj = document.createElement("div");
+    refreshBlock.obj.classList.add("refresh-block");
+    refreshBlock.obj.classList.add("refresh-block-visible");
+    document.body.appendChild(refreshBlock.obj);
+
+    refreshBlock.obj.addEventListener("click", function(ev) {
+      cng.filters.applyAndLoad();
+    });
+
+    return refreshBlock;
+  }
+
+  cng.filters = {
+    query : {},
+
+    bindTo : function(formId) {
+      var _self = this;
+      _self.refreshBlock = createRefreshBlock();
+
+      var filtersForm = document.getElementById(formId);
+      filtersForm.addEventListener("change", function(ev) {
+        (ev.srcElement.checked ? _self.add : _self.remove).call(_self, ev.srcElement)
+        _self.refreshBlock.moveTo(ev.srcElement);
+      });
+    },
+
+    add : function(element) {
+      if (!this.query[element.name]) {
+        this.query[element.name] = [];
+      }
+      this.query[element.name].push(element.id);
+    },
+
+    remove : function(element) {
+      this.query[element.name].splice(this.query[element.name].indexOf(element.id), 1);
+    },
+
+    applyAndLoad : function() {
+      cng.item.load(this.query);
+    }
+  };
+
+  cng.filters.bindTo("filters");
 }());
 
 /**

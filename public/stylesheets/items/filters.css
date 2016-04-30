@@ -638,3 +638,33 @@ xcustom form elements
     display: none;
   }
 }
+
+
+/* refreshBlock */
+
+.refresh-block {
+  width: 60px;
+  height: 24px;
+  text-align: center;
+  color: #41307C;
+  line-height: 20px;
+  font-size: 10px;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #41307C;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.refresh-block:before {
+    content: "View";
+}
+
+.refresh-block, .refresh-block-visible {
+  z-index: 2;
+}
+
+.refreshBlock, .refresh-block-hidden {
+  z-index: -1;
+}
