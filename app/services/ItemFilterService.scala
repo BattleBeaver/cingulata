@@ -10,6 +10,9 @@ import scala.concurrent.Future
   */
 class ItemFilterService @Inject()(itemFilterDao: ItemFilterDao) {
   def findItemsByFilter(filterJson: play.api.libs.json.JsValue): Future[String] = {
-    itemFilterDao.findItemsByFilter(filterJson)
+    val where = (filterJson \ "category").asOpt[Array[String]].getOrElse(Array.empty)
+    println(filterJson.toString)
+    val criteria = models.filter.InFilterCriteria("category", where);
+    itemFilterDao.findItemsByFilter(criteria)
   }
 }

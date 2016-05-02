@@ -13,22 +13,21 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 import scala.concurrent.Future
 
+import models.filter.InFilterCriteria
+
 /**
   * Created by kuzmentsov@gmail.com
  */
 @ImplementedBy(classOf[ItemFilterDaoImpl]) trait ItemFilterDao {
-  def findItemsByFilter(filterJson: play.api.libs.json.JsValue): Future[String]
+  def findItemsByFilter(filterCriteria: InFilterCriteria): Future[String]
 }
 
 @Singleton class ItemFilterDaoImpl @Inject()(mongo: MongoConfig) extends ItemFilterDao {
   val items: MongoCollection = mongo.collection("items")
 
-  def findItemsByFilter(filterJson: play.api.libs.json.JsValue): Future[String] = {
-    val pagingRange = 50
-
-      (filterJson \ "category").asOpt[Array[String]] map (
-        categories => return Future { items.find("category" $in categories).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]") }
-      )
-      return Future { "[]" }
+  def findItemsByFilter(filterCriteria: InFilterCriteria): Future[String] = {
+      Future {
+        items.find(filterCriteria.what $in filterCriteria.where).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
+      }
   }
 }

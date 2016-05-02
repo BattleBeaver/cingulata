@@ -261,6 +261,9 @@
 
     remove : function(element) {
       this.query[element.name].splice(this.query[element.name].indexOf(element.id), 1);
+      if (this.query[element.name].length == 0) {
+        delete this.query[element.name]
+      }
     },
 
     applyAndLoad : function() {
