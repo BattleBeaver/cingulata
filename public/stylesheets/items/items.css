@@ -174,12 +174,7 @@ a:hover {
     z-index: 0;
 }
 .products-grid li.item:hover {
-  border-top: 1px solid #f0f0f0;
-  border-left: 1px solid #f0f0f0;
-  border-right: 1px solid #f0f0f0;
-  border-bottom: none;
-  /*margin: -1px -1px 0 -1px;*/
-  box-shadow: 2px 1px 10px 3px rgba(250, 250, 250, 250);
+	box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
 }
 /*div.wish-list .products-grid .item-inner:hover {
     border-top: none;
@@ -514,4 +509,9 @@ a.button.red {
 .catalog-product-view .wrapper {
     z-index: initial;
     position: initial;
+}
+
+.loader {
+	width: 100%;
+	height: 100%;
 }

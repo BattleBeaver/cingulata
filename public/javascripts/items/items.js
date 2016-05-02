@@ -216,19 +216,22 @@
       },
 
       moveTo : function(obj) {
-        obj = obj.labels ? obj.labels[0] : obj;
+        obj = obj.labels.length > 0 ? obj.labels[0] : obj;
         var _coordinates = obj.getBoundingClientRect();
         var _top = _coordinates.top;
         var _right = _coordinates.right;
 
         this.obj.style.top = _top + "px";
         this.obj.style.left = _right + 10 + "px";
+
+        this.display();
       }
     };
 
     refreshBlock.obj = document.createElement("div");
     refreshBlock.obj.classList.add("refresh-block");
     refreshBlock.obj.classList.add("refresh-block-visible");
+    refreshBlock.hide();
     cng.filters.form.parentNode.appendChild(refreshBlock.obj);
 
     refreshBlock.obj.addEventListener("click", function(ev) {
@@ -246,7 +249,12 @@
 
       _self.form = document.getElementById(formId);
       _self.form.addEventListener("change", function(ev) {
-        (ev.srcElement.checked ? _self.add : _self.remove).call(_self, ev.srcElement)
+        if (ev.srcElement.type == "checkbox") {
+          (ev.srcElement.checked ? _self.add : _self.remove).call(_self, ev.srcElement)
+        } else if (ev.srcElement.type == "search") {
+          _self.set(ev.srcElement);
+        }
+
         _self.refreshBlock.moveTo(ev.srcElement);
       });
 
@@ -257,7 +265,11 @@
       if (!this.query[element.name]) {
         this.query[element.name] = [];
       }
-      this.query[element.name].push(element.id);
+      this.query[element.name].push(element.value);
+    },
+
+    set : function(element) {
+      this.query[element.name] = element.value;
     },
 
     remove : function(element) {

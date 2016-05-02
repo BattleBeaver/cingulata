@@ -5,14 +5,22 @@ import daos.{ItemFilterDao}
 
 import scala.concurrent.Future
 
+import models.filter._
+
 /**
   * Created by kuzmentsov@gmail.com
   */
 class ItemFilterService @Inject()(itemFilterDao: ItemFilterDao) {
   def findItemsByFilter(filterJson: play.api.libs.json.JsValue): Future[String] = {
-    val where = (filterJson \ "category").asOpt[Array[String]].getOrElse(Array.empty)
-    println(filterJson.toString)
-    val criteria = models.filter.InFilterCriteria("category", where);
-    itemFilterDao.findItemsByFilter(criteria)
+    val in: Option[In] = (filterJson \ "category").asOpt[Array[String]] match {
+      case Some(e) => Some(In("category", e))
+      case None => None
+    }
+    val textSearch: Option[TextSearch] = (filterJson \ "search").asOpt[String] match {
+      case Some(e) => Some(TextSearch(e))
+      case None => None
+    }
+
+    itemFilterDao.findItemsByFilter(Filter(in, textSearch))
   }
 }

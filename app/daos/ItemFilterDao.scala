@@ -13,21 +13,29 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 import scala.concurrent.Future
 
-import models.filter.InFilterCriteria
+import models.filter.Filter
 
 /**
   * Created by kuzmentsov@gmail.com
  */
 @ImplementedBy(classOf[ItemFilterDaoImpl]) trait ItemFilterDao {
-  def findItemsByFilter(filterCriteria: InFilterCriteria): Future[String]
+  def findItemsByFilter(filter: Filter): Future[String]
 }
 
 @Singleton class ItemFilterDaoImpl @Inject()(mongo: MongoConfig) extends ItemFilterDao {
   val items: MongoCollection = mongo.collection("items")
 
-  def findItemsByFilter(filterCriteria: InFilterCriteria): Future[String] = {
+  def findItemsByFilter(filter: Filter): Future[String] = {
       Future {
-        items.find(filterCriteria.what $in filterCriteria.where).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
+        var query: com.mongodb.DBObject = null
+        if (filter.in.isDefined && filter.textSearch.isDefined) {
+          query = $and(filter.in.get.what $in filter.in.get.where, "title" $eq s".*${filter.textSearch.get}*".r)
+        } else if (filter.in.isDefined) {
+          query = filter.in.get.what $in filter.in.get.where
+        } else if (filter.textSearch.isDefined) {
+          query = "title" $eq s".*${filter.textSearch.get.what}.*".r
+        }
+        items.find(query).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
       }
   }
 }
