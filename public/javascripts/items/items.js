@@ -229,7 +229,7 @@
     refreshBlock.obj = document.createElement("div");
     refreshBlock.obj.classList.add("refresh-block");
     refreshBlock.obj.classList.add("refresh-block-visible");
-    document.body.appendChild(refreshBlock.obj);
+    cng.filters.form.parentNode.appendChild(refreshBlock.obj);
 
     refreshBlock.obj.addEventListener("click", function(ev) {
       cng.filters.applyAndLoad();
@@ -243,13 +243,14 @@
 
     bindTo : function(formId) {
       var _self = this;
-      _self.refreshBlock = createRefreshBlock();
 
-      var filtersForm = document.getElementById(formId);
-      filtersForm.addEventListener("change", function(ev) {
+      _self.form = document.getElementById(formId);
+      _self.form.addEventListener("change", function(ev) {
         (ev.srcElement.checked ? _self.add : _self.remove).call(_self, ev.srcElement)
         _self.refreshBlock.moveTo(ev.srcElement);
       });
+
+      _self.refreshBlock = createRefreshBlock();
     },
 
     add : function(element) {
