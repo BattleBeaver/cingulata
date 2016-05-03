@@ -26,16 +26,18 @@ import models.filter.Filter
   val items: MongoCollection = mongo.collection("items")
 
   def findItemsByFilter(filter: Filter): Future[String] = {
+      val limit = 50;
       Future {
         var query: com.mongodb.DBObject = null
         if (filter.in.isDefined && filter.textSearch.isDefined) {
-          query = $and(filter.in.get.what $in filter.in.get.where, "title" $eq s".*${filter.textSearch.get}*".r)
+          query = $and(filter.in.get.what $in filter.in.get.where, "title" $eq s"(?i).*${filter.textSearch.get.what}*".r)
         } else if (filter.in.isDefined) {
           query = filter.in.get.what $in filter.in.get.where
         } else if (filter.textSearch.isDefined) {
-          query = "title" $eq s".*${filter.textSearch.get.what}.*".r
+          query = "title" $eq s"(?i).*${filter.textSearch.get.what}.*".r
         }
-        items.find(query).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
+        println(query)
+        items.find(query).limit(limit).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
       }
   }
 }
