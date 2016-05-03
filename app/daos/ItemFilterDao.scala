@@ -36,7 +36,6 @@ import models.filter.Filter
         } else if (filter.textSearch.isDefined) {
           query = "title" $eq s"(?i).*${filter.textSearch.get.what}.*".r
         }
-        println(query)
         items.find(query).limit(limit).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
       }
   }

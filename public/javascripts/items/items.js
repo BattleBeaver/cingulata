@@ -24,7 +24,14 @@
       },
       processData: false,
       type: 'POST',
-      url: '/item/find'
+      url: '/item/find',
+      beforeSend: function () {
+          $("#loader").css("display", "block");
+      },
+      complete: function () {
+          window.setTimeout(function() {$("#loader").css("display", "none")}, 500)
+
+      }
     });
 
   }

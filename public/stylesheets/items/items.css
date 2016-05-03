@@ -511,7 +511,17 @@ a.button.red {
     position: initial;
 }
 
-.loader {
-	width: 100%;
-	height: 100%;
+#loader {
+    display : none;
+    position : fixed;
+    z-index: 100;
+    background-image : url('/assets/images/ajax-loader.gif');
+    background-color:#B3ACCB;
+    opacity : 0.4;
+    background-repeat : no-repeat;
+    background-position : center;
+    left : 0;
+    bottom : 0;
+    right : 0;
+    top : 0;
 }
