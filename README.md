@@ -52,3 +52,6 @@ Insert nodes definitions:
   ProxyPassReverse / http://127.0.0.1:9000/
 &lt;/VirtualHost/&gt;
 </pre>
+
+<h1>Running with local Mongo DB installed</h1>
+activator run -Dconfig.resource=dev.conf
