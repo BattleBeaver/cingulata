@@ -23,6 +23,13 @@ libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "1.1.0"
 
 libraryDependencies += "com.github.t3hnar" % "scala-bcrypt_2.11" % "2.5"
 
+libraryDependencies ++= Seq(
+    "jp.t2v" %% "play2-auth"        % "0.14.2",
+    "jp.t2v" %% "play2-auth-social" % "0.14.2",
+    "jp.t2v" %% "play2-auth-test"   % "0.14.2" % "test",
+    play.sbt.Play.autoImport.cache
+  )
+
 //casbah
 libraryDependencies += "org.mongodb" %% "casbah" % "3.1.0"
 

@@ -18,55 +18,16 @@ import models.Item
   * Created by kuzmentsov@gmail.com
  */
 @ImplementedBy(classOf[ItemDaoImpl]) trait ItemDao {
-  protected val pagingRange = 5
-
-  def find(itemId: String): Future[Item]
-
-  @deprecated def all: Future[Seq[Item]]
-
-  def allForPage(pageNum: Int): Future[Seq[Item]]
-
-  def findByHost(host: String): Future[Item] = ???
-
   def allCategories: Future[Seq[String]]
-
-  def allSubCategories: Future[Seq[String]]
-
-  def allHosts: Future[List[String]] = ???
-
   def setCategoryName(oldName: String, newName: String): Future[Int]
 }
 
 @Singleton class ItemDaoImpl @Inject()(mongo: MongoConfig) extends ItemDao {
   val items: MongoCollection = mongo.collection("items")
 
-  def find(itemId: String): Future[Item] = {
-    Future {
-      objAsItem(items.findOne(MongoDBObject("_id" -> new ObjectId(itemId))).get.asInstanceOf[BasicDBObject])
-    }
-  }
-
-  @deprecated def all: Future[Seq[Item]] = {
-    Future {
-      items.find().map(x => objAsItem(x.asInstanceOf[BasicDBObject])).toList
-    }
-  }
-
-  def allForPage(pageNum: Int): Future[Seq[Item]] = {
-    Future {
-      items.find().skip(pageNum * pagingRange).limit(pagingRange).map(x => objAsItem(x.asInstanceOf[BasicDBObject])).toList
-    }
-  }
-
   def allCategories: Future[Seq[String]] = {
     Future {
       items.distinct("category").map(_.toString)
-    }
-  }
-
-  override def allSubCategories: Future[Seq[String]] = {
-    Future {
-      items.distinct("subcategory").map(_.toString)
     }
   }
 

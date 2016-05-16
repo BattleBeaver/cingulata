@@ -18,7 +18,8 @@ import models.filter.Filter
 /**
   * Created by kuzmentsov@gmail.com
  */
-@ImplementedBy(classOf[ItemFilterDaoImpl]) trait ItemFilterDao {
+@ImplementedBy(classOf[ItemFilterDaoImpl])
+trait ItemFilterDao {
   def findItemsByFilter(filter: Filter): Future[String]
 }
 
