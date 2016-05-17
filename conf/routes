@@ -5,22 +5,12 @@ GET         /assets/*file                               @controllers.Assets.at(p
 
 GET 		/  											                        @controllers.Assets.at(path="/public", file="html/index/index.html")
 
-GET 		/signup  								                        @controllers.Assets.at(path="/public", file="html/signup/signup.html")
-#POST    /signup                                         @controllers.AuthenticationController.signup
-
-GET 		/signin  								                        @controllers.Assets.at(path="/public", file="html/signup/signin.html")
-POST    /signin                                         @controllers.AuthenticationController.signin
-
 GET 		/items/  								                        @controllers.Assets.at(path="/public", file="html/items/items_collection.html")
 GET 		/items/index  								                  @controllers.Assets.at(path="/public", file="html/items/items.html")
 
 #filters
 POST         /item/find                                  @controllers.ItemFilterController.itemsFindByFilterAsJson
 
-#session
-GET         /user/logout                                @controllers.AuthenticationController.logout
-
-#test
-GET         /test                                       @controllers.TestController.test
-
 ->          /admin                                      admin.Routes
+
+->          /oauth2                                     oauth.Routes
