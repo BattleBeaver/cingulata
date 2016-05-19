@@ -1,4 +1,4 @@
-package bootstrap
+package bootstrap.mongo
 
 import com.google.inject.{Inject, Singleton}
 import com.mongodb.ServerAddress
@@ -19,9 +19,9 @@ class MongoConfig @Inject()(applicationLifecycle: ApplicationLifecycle, configur
 
   //credentials to access database
   private lazy val credentials = MongoCredential.createCredential(
-    configuration.getString("mongo.db.username").get,
-    configuration.getString("mongo.db.name").get,
-    configuration.getString("mongo.db.password").get.toCharArray
+    configuration.getString("mongo.db.username").getOrElse(throw new RuntimeException("Property mongo.db.username is not set")),
+    configuration.getString("mongo.db.name").getOrElse(throw new RuntimeException("Property mongo.db.name is not set")),
+    configuration.getString("mongo.db.password").getOrElse(throw new RuntimeException("Property mongo.db.password is not set")).toCharArray
   )
 
   private val client = MongoClient(List(server), List(credentials))

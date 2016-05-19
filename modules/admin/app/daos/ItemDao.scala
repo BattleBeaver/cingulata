@@ -1,6 +1,6 @@
 package daos
 
-import bootstrap.MongoConfig
+import bootstrap.mongo.MongoConfig
 import com.google.inject.{ImplementedBy, Inject, Singleton}
 import com.mongodb.BasicDBObject
 import com.mongodb.casbah.commons.MongoDBObject

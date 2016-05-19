@@ -1,22 +1,27 @@
 package models
 
 import org.bson.types.ObjectId
+import org.joda.time.DateTime
 import play.api.libs.json._
 
 /**
  * @author kuzmentsov@gmail.com
  * @version 1.0
  */
-case class User (
+case class AccessToken (
     val _id: Option[ObjectId],
-    val name: String,
-    val email: String,
-    val password: String,
-    val grantType: String
+    val accessToken: String,
+    val refreshToken: Option[String],
+    val userId: ObjectId,
+    val scope: Option[String],
+    val expiresIn: Int,
+    val createdAt: DateTime,
+    val clientId: String
+
 )
 
-object UserFormat {
-  implicit val userFormat = Json.format[User]
+object AccessTokenFormat {
+  implicit val accessTokenFormat = Json.format[AccessToken];
 
   implicit val objectIdFormat: Format[ObjectId] = new Format[ObjectId] {
 

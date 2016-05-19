@@ -15,9 +15,13 @@ lazy val commonSettings = Seq(
 
 lazy val cingulata = (project in file(".")).aggregate(oauth).dependsOn(oauth).aggregate(admin).dependsOn(admin).settings(commonSettings: _*).enablePlugins(PlayScala,ElasticBeanstalkPlugin,BuildInfoPlugin)
 
-lazy val admin = (project in file("modules/admin")).settings(commonSettings: _*).enablePlugins(PlayScala)
+lazy val common = (project in file("modules/common")).settings(commonSettings: _*).enablePlugins(PlayScala)
 
-lazy val oauth = (project in file("modules/oauth")).settings(commonSettings: _*).enablePlugins(PlayScala)
+lazy val admin = (project in file("modules/admin")).aggregate(common).dependsOn(common).settings(commonSettings: _*).enablePlugins(PlayScala)
+
+lazy val oauth = (project in file("modules/oauth")).aggregate(common).dependsOn(common).settings(commonSettings: _*).enablePlugins(PlayScala)
+
+
 
 libraryDependencies ++= Seq(jdbc, cache, ws, filters, specs2 % Test)
 
