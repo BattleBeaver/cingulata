@@ -1,11 +1,11 @@
 package daos
 
-import bootstrap.mongo.MongoConfig
 import com.google.inject.{ImplementedBy, Inject, Singleton}
 import com.mongodb.casbah.commons.MongoDBObject
 import com.mongodb.casbah.MongoCollection
 
 import models.DataMapping
+import mongo.config.MongoConfig
 
 /**
   * Created by kuzmentsov@gmail.com

@@ -1,4 +1,4 @@
-package bootstrap.mongo
+package mongo.config
 
 import com.google.inject.{Inject, Singleton}
 import com.mongodb.ServerAddress

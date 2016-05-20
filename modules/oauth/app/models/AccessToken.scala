@@ -1,5 +1,6 @@
 package models
 
+import commons.MongoFormat
 import org.bson.types.ObjectId
 import org.joda.time.DateTime
 import play.api.libs.json._
@@ -23,21 +24,6 @@ case class AccessToken (
 object AccessTokenFormat {
   implicit val accessTokenFormat = Json.format[AccessToken];
 
-  implicit val objectIdFormat: Format[ObjectId] = new Format[ObjectId] {
+  implicit val objectIdFormat: Format[ObjectId] = MongoFormat.objectIdFormat;
 
-    def reads(json: JsValue) = {
-      json match {
-        case jsString: JsString => {
-          if ( ObjectId.isValid(jsString.value) ) JsSuccess(new ObjectId(jsString.value))
-          else JsError("Invalid ObjectId")
-        }
-        case other => JsError("Can't parse json path as an ObjectId. Json content = " + other.toString())
-      }
-    }
-
-    def writes(oId: ObjectId): JsValue = {
-      JsString(oId.toString)
-    }
-
-  }
 }

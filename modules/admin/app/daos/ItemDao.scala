@@ -1,10 +1,10 @@
 package daos
 
-import bootstrap.mongo.MongoConfig
 import com.google.inject.{ImplementedBy, Inject, Singleton}
 import com.mongodb.BasicDBObject
 import com.mongodb.casbah.commons.MongoDBObject
 import com.mongodb.casbah.{MongoCollection}
+import mongo.config.MongoConfig
 import org.bson.types.ObjectId
 
 import scala.concurrent.Future

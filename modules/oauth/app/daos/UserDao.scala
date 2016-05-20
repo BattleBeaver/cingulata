@@ -4,9 +4,8 @@ import com.google.inject.{Inject, ImplementedBy, Singleton}
 
 import com.mongodb.casbah.MongoCollection
 import com.mongodb.casbah.query.Imports._
-
-import bootstrap.mongo.MongoConfig
 import models.User
+import mongo.config.MongoConfig
 
 import scala.concurrent.{ExecutionContext, Future}
 /**
