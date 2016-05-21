@@ -10,7 +10,7 @@ import play.api.libs.json._
  * @version 1.0
  */
 
-case class User1 (
+case class User (
     val _id: Option[ObjectId],
     val email: String,
     val password: String,
@@ -18,21 +18,18 @@ case class User1 (
 )
 
 object UserFormat {
-  implicit val userFormat = Json.format[User1]
+  implicit val userFormat = Json.format[User]
 
   implicit val objectIdFormat: Format[ObjectId] = MongoFormat.objectIdFormat
 }
 
 object UserConverter {
-  def fromBSON(obj: BasicDBObject): User1 = {
-
-    val user1 = User1(
+  def fromBSON(obj: BasicDBObject): User = {
+    User(
       Some(obj.getObjectId("_id")),
       obj.getString("email"),
       obj.getString("password"),
       obj.getLong("registeredOn")
     )
-    println(user1)
-    return user1
   }
 }
