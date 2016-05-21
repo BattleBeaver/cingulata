@@ -5,7 +5,6 @@ import com.mongodb.BasicDBObject
 import com.mongodb.casbah.commons.MongoDBObject
 import com.mongodb.casbah.{MongoCollection}
 import mongo.config.MongoConfig
-import org.bson.types.ObjectId
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global

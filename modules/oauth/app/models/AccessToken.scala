@@ -22,8 +22,7 @@ case class AccessToken (
 )
 
 object AccessTokenFormat {
-  implicit val accessTokenFormat = Json.format[AccessToken];
-
   implicit val objectIdFormat: Format[ObjectId] = MongoFormat.objectIdFormat;
 
+  implicit val accessTokenFormat = Json.format[AccessToken];
 }
