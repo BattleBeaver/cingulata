@@ -9,7 +9,7 @@ import mongo.config.MongoConfig
 
 import scala.concurrent.{ExecutionContext, Future}
 /**
-  * Created by kuzmentsov@gmail.com
+ * Created by kuzmentsov@gmail.com
  */
 @ImplementedBy(classOf[UserDaoImpl])
 trait UserDao {

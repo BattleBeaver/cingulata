@@ -5,6 +5,8 @@ GET         /assets/*file                               @controllers.Assets.at(p
 
 GET 		/  											                        @controllers.Assets.at(path="/public", file="html/index/index.html")
 
+#GET     /favicon.ico                                    @controllers.Assets.at(path="/public/images", file="cng.ico")
+
 GET 		/items/  								                        @controllers.Assets.at(path="/public", file="html/items/items_collection.html")
 GET 		/items/index  								                  @controllers.Assets.at(path="/public", file="html/items/items.html")
 
