@@ -13,6 +13,6 @@ GET 		/items/index  								                  @controllers.Assets.at(path="/publ
 #filters
 POST         /item/find                                  @controllers.ItemFilterController.itemsFindByFilterAsJson
 
-->          /admin                                      admin.Routes
+->          /admin                                        admin.Routes
 
-->          /oauth2                                     oauth.Routes
+->          /auth                                         auth.Routes

@@ -1,5 +1,3 @@
-import com.typesafe.sbt.packager.docker._
-
 lazy val projectName = "cingulata"
 
 name := projectName
@@ -13,13 +11,13 @@ lazy val commonSettings = Seq(
   routesGenerator := InjectedRoutesGenerator
 )
 
-lazy val cingulata = (project in file(".")).aggregate(oauth).dependsOn(oauth).aggregate(admin).dependsOn(admin).settings(commonSettings: _*).enablePlugins(PlayScala,ElasticBeanstalkPlugin,BuildInfoPlugin)
+lazy val cingulata = (project in file(".")).aggregate(auth).dependsOn(auth).aggregate(admin).dependsOn(admin).settings(commonSettings: _*).enablePlugins(PlayScala,ElasticBeanstalkPlugin,BuildInfoPlugin)
 
 lazy val common = (project in file("modules/common")).settings(commonSettings: _*).enablePlugins(PlayScala)
 
 lazy val admin = (project in file("modules/admin")).aggregate(common).dependsOn(common).settings(commonSettings: _*).enablePlugins(PlayScala)
 
-lazy val oauth = (project in file("modules/oauth")).aggregate(common).dependsOn(common).settings(commonSettings: _*).enablePlugins(PlayScala)
+lazy val auth = (project in file("modules/auth")).aggregate(common).dependsOn(common).settings(commonSettings: _*).enablePlugins(PlayScala)
 
 
 
@@ -38,10 +36,3 @@ libraryDependencies += "org.scalamock" %% "scalamock-scalatest-support" % "3.2.2
 libraryDependencies += "com.typesafe.play" %% "play-mailer" % "3.0.1"
 
 unmanagedResourceDirectories in Test <+= baseDirectory(_ / "target/web/public/test")
-
-// Docker/Elastic Beanstalk
-maintainer in Docker := "Johnny Utah <johnny.utah@fbi.gov>"
-
-dockerExposedPorts := Seq(9000)
-
-dockerBaseImage := "java:latest"
