@@ -2,16 +2,20 @@ lazy val projectName = "cingulata"
 
 name := projectName
 
-name in Universal := "cingulata"
+name in Universal := projectName
 
 lazy val commonSettings = Seq(
   organization := "org.cingulata",
-  version := "0.1.0",
+  version := "0.1.0-M-0",
   scalaVersion := "2.11.7",
   routesGenerator := InjectedRoutesGenerator
 )
 
-lazy val cingulata = (project in file(".")).aggregate(auth).dependsOn(auth).aggregate(admin).dependsOn(admin).settings(commonSettings: _*).enablePlugins(PlayScala,ElasticBeanstalkPlugin,BuildInfoPlugin)
+lazy val cingulata = (project in file("."))
+              .aggregate(auth).dependsOn(auth)
+              .aggregate(admin).dependsOn(admin)
+              .enablePlugins(PlayScala)
+              .settings(commonSettings: _*)
 
 lazy val common = (project in file("modules/common")).settings(commonSettings: _*).enablePlugins(PlayScala)
 

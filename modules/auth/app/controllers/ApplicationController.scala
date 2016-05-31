@@ -1,6 +1,6 @@
 package controllers.auth
 
-import javax.inject.Inject
+import com.google.inject.Inject
 
 import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
 import com.mohiva.play.silhouette.impl.providers.SocialProviderRegistry

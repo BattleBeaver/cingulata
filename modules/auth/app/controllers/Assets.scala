@@ -1,6 +1,6 @@
 package controllers.auth
 
-import javax.inject._
+import com.google.inject.Inject
 
 import play.api.http.HttpErrorHandler
 

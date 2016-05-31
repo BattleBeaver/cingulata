@@ -1,7 +1,7 @@
 package controllers.auth
 
 import java.util.UUID
-import javax.inject.Inject
+import com.google.inject.Inject
 
 import com.mohiva.play.silhouette.api._
 import com.mohiva.play.silhouette.api.repositories.AuthInfoRepository
