@@ -4,6 +4,8 @@ name := projectName
 
 name in Universal := projectName
 
+herokuAppName in Compile := projectName
+
 lazy val commonSettings = Seq(
   organization := "org.cingulata",
   version := "0.1.0-M-0",
