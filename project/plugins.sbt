@@ -5,4 +5,4 @@ resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/release
 // The Play plugin
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.5.3")
 
-addSbtPlugin("com.heroku" % "sbt-heroku" % "1.0.0")
+addSbtPlugin("com.heroku" % "sbt-heroku" % "1.0.1")
