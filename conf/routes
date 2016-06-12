@@ -14,5 +14,3 @@ GET 		/items/index  								                  @controllers.Assets.at(path="/publ
 POST         /item/find                                  @controllers.ItemFilterController.itemsFindByFilterAsJson
 
 ->          /admin                                        admin.Routes
-
-->          /auth                                         auth.Routes
