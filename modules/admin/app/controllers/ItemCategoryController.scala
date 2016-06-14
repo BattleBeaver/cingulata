@@ -3,7 +3,6 @@ package controllers.admin
 import com.google.inject.Inject
 import models.DataMapping
 import play.api.Play.current
-import play.api.cache.Cached
 import play.api.i18n.MessagesApi
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc._
