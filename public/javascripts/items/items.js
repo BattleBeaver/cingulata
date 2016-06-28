@@ -343,14 +343,11 @@ function addNewEntry() {
       block = false;
       cng.item.clearGrid();
       cng.item.load(this.query);
-<<<<<<< HEAD
     },
 
     count : function() {
       cng.item.count(this.query);
-=======
       window.addEventListener("scroll", addNewEntry, false);
->>>>>>> 648b7abf5c2b790a89f14710a67082440c377645
     }
   };
 
