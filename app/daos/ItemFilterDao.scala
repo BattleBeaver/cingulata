@@ -17,14 +17,14 @@ import models.filter.Filter
  */
 @ImplementedBy(classOf[ItemFilterDaoImpl])
 trait ItemFilterDao {
-  def findItemsByFilter(filter: Filter): Future[String]
+  def findItemsByFilter(filter: Filter, page: Int): Future[String]
 }
 
 @Singleton class ItemFilterDaoImpl @Inject()(mongo: MongoConfig) extends ItemFilterDao {
   val items: MongoCollection = mongo.collection("items")
 
-  def findItemsByFilter(filter: Filter): Future[String] = {
-      val limit = 50;
+  def findItemsByFilter(filter: Filter, page: Int): Future[String] = {
+      val limit = 40;
       Future {
         var query: com.mongodb.DBObject = null
         if (filter.in.isDefined && filter.textSearch.isDefined) {
@@ -34,7 +34,7 @@ trait ItemFilterDao {
         } else if (filter.textSearch.isDefined) {
           query = "title" $eq s"(?i).*${filter.textSearch.get.what}.*".r
         }
-        items.find(query).limit(limit).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
+        items.find(query).skip(page * limit).limit(limit).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
       }
   }
 }

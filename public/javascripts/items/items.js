@@ -1,38 +1,67 @@
+var page = 1;
+var block = false;
+function addNewEntry() {
+    var items = document.querySelector(".cd-gallery");
+    var result = parseInt(items.clientHeight) - parseInt(this.pageYOffset);
+    if (result < window.innerHeight && !block) {
+      page++;
+      var pager = document.querySelector(".pager");
+      pager.innerHTML = page;
+      block = true;
+      cng.item.load(cng.filters.query);
+}
+};
+
 (function() {
   var gallery = document.querySelector(".products-grid");
 
   window.addEventListener("load", function() {
-    cng.item.load({});
+
+    var items = document.querySelector(".cd-gallery");
+    // var result = parseInt(items.clientHeight) - parseInt(this.pageYOffset);
+    cng.item.load(cng.filters.query);
   });
+
+    window.addEventListener("scroll", addNewEntry, false);
+
 
   cng.item = {};
 
   /**
-   * Loading items into grid.
-   */
+  * Loading items into grid.
+  */
   cng.item.load = function(query) {
-    gallery.innerHTML = "";
+    // gallery.innerHTML = "";
     $.ajax({
       contentType: 'application/json',
       data: JSON.stringify(query),
       dataType: 'json',
       success: function(data){
-          createList(JSON.stringify(data));
+        createList(JSON.stringify(data));
+        block = false;
       },
       error: function(){
-          console.error("Error cng.item.load");
+        console.error("Error cng.item.load");
       },
+
       processData: false,
       type: 'POST',
-      url: '/item/find',
+      url: '/item/find?page=' + page,
       beforeSend: function () {
-          $("#loader").css("display", "block");
+        $("#loader").css("display", "block");
       },
       complete: function () {
-          window.setTimeout(function() {$("#loader").css("display", "none")}, 500)
-
+        window.setTimeout(function() {$("#loader").css("display", "none")}, 500)
       }
     });
+
+  }
+
+  cng.item.clearGrid = function(query) {
+    gallery.innerHTML = "";
+  }
+
+  function addNumberPage(){
 
   }
 
@@ -41,20 +70,28 @@
   }
 
   /**
-   * Processes response, containing String-represented Json.
-   * @var response {Object}
-   */
+  * Processes response, containing String-represented Json.
+  * @var response {Object}
+  */
+
   function createList(response) {
     var list = JSON.parse(response);
+    if (list.length === 0) {
+      window.removeEventListener("scroll", addNewEntry);
+      return false;
+    }
+    console.log(response.length);
     for (var i = 0; i < list.length; i++) {
       create(list[i]);
     }
-  }
+    };
+
+
 
   /**
-   * Processes item's object.
-   * @var item {Object}
-   */
+  * Processes item's object.
+  * @var item {Object}
+  */
   function create(item) {
     var itemLi = document.createElement("li");
     itemLi.style.display = 'none';
@@ -147,8 +184,8 @@
     attrContent.className = "attr-content";
 
     /**
-     * If item's features object is not empty - display corresponding view on page.
-     */
+    * If item's features object is not empty - display corresponding view on page.
+    */
     if (!isEmpty(item.features)) {
       var featuresHolder = document.createElement("p");
       for (var feature in item.features) {
@@ -163,11 +200,11 @@
         featuresHolder.appendChild(key);
         featuresHolder.appendChild(value);
       }
-        attrContent.appendChild(featuresHolder);
-        attrContainer.appendChild(attrContent);
-        content.appendChild(attrContainer);
-        infoPopup.appendChild(content);
-        attributesWrapper.appendChild(infoPopup);
+      attrContent.appendChild(featuresHolder);
+      attrContainer.appendChild(attrContent);
+      content.appendChild(attrContainer);
+      infoPopup.appendChild(content);
+      attributesWrapper.appendChild(infoPopup);
     }
 
     priceWrapper.appendChild(sum);
@@ -287,7 +324,11 @@
     },
 
     applyAndLoad : function() {
+      page = 1;
+      block = false;
+      cng.item.clearGrid();
       cng.item.load(this.query);
+      window.addEventListener("scroll", addNewEntry, false);
     }
   };
 
