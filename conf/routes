@@ -11,7 +11,7 @@ GET 		/items/  								                        @controllers.Assets.at(path="/pub
 GET 		/items/index  								                  @controllers.Assets.at(path="/public", file="html/items/items.html")
 
 #filters
-POST         /item/find                                  @controllers.ItemFilterController.itemsFindByFilterAsJson
+POST         /item/find                                  @controllers.ItemFilterController.itemsFindByFilterAsJson(page: Int ?=0)
 
 ->          /admin                                        admin.Routes
 
