@@ -9,8 +9,8 @@ import services.{ItemFilterService, ItemService}
   * Created by kuzmentsov@gmail.com
   */
 class ItemFilterController @Inject()(itemService: ItemService, itemFilterService: ItemFilterService) extends Controller {
-  def itemsFindByFilterAsJson = Action.async(parse.tolerantJson) {
-    implicit request => itemFilterService.findItemsByFilter(request.body).map((json: String) => Ok(json).as("application/json"))
+  def itemsFindByFilterAsJson(page: Int) = Action.async(parse.tolerantJson) {
+    implicit request => itemFilterService.findItemsByFilter(request.body, page).map((json: String) => Ok(json).as("application/json"))
   }
 
   def itemsCountByFilterAsJson = Action.async(parse.tolerantJson) {

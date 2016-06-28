@@ -525,3 +525,13 @@ a.button.red {
     right : 0;
     top : 0;
 }
+.pager {
+	width:30px;
+	height:30px;
+	text-align: center;
+	position: fixed;
+	top: 75%;
+	left:95%;
+	/*display: none;*/
+	border: 1px solid red;
+}

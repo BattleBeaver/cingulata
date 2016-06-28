@@ -11,7 +11,7 @@ import models.filter._
   * Created by kuzmentsov@gmail.com
   */
 class ItemFilterService @Inject()(itemFilterDao: ItemFilterDao) {
-  def findItemsByFilter(filterJson: play.api.libs.json.JsValue): Future[String] = {
+  def findItemsByFilter(filterJson: play.api.libs.json.JsValue, page: Int): Future[String] = {
     val in: Option[In] = (filterJson \ "category").asOpt[Array[String]] match {
       case Some(e) => Some(In("category", e))
       case None => None
@@ -21,7 +21,7 @@ class ItemFilterService @Inject()(itemFilterDao: ItemFilterDao) {
       case None => None
     }
 
-    itemFilterDao.findItemsByFilter(Filter(in, textSearch))
+    itemFilterDao.findItemsByFilter(Filter(in, textSearch), page)
   }
 
   def countItemsByFilter(filterJson: play.api.libs.json.JsValue): Future[Int] = {
@@ -34,6 +34,6 @@ class ItemFilterService @Inject()(itemFilterDao: ItemFilterDao) {
       case None => None
     }
 
-      itemFilterDao.countItemsByFilter(Filter(in, textSearch))
+    itemFilterDao.countItemsByFilter(Filter(in, textSearch))
   }
 }
