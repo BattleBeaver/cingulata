@@ -2,6 +2,7 @@
   var gallery = document.querySelector(".products-grid");
 
   window.addEventListener("load", function() {
+    cng.item.count({});
     cng.item.load({});
   });
 
@@ -33,7 +34,24 @@
 
       }
     });
-
+  }
+  cng.item.count = function(query) {
+    $.ajax({
+      contentType: 'application/json',
+      data: JSON.stringify(query),
+      dataType: 'json',
+      success: function(data){
+          console.log(data);
+      },
+      error: function(){
+          console.error("Error cng.item.count");
+      },
+      processData: false,
+      type: 'POST',
+      url: '/item/count',
+      complete: function () {
+      }
+    });
   }
 
   function isEmpty(obj) {
@@ -288,6 +306,10 @@
 
     applyAndLoad : function() {
       cng.item.load(this.query);
+    },
+
+    count : function() {
+      cng.item.count(this.query);
     }
   };
 

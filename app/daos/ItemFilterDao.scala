@@ -18,6 +18,8 @@ import models.filter.Filter
 @ImplementedBy(classOf[ItemFilterDaoImpl])
 trait ItemFilterDao {
   def findItemsByFilter(filter: Filter): Future[String]
+  def countItemsByFilter(filter: Filter): Future[Int]
+
 }
 
 @Singleton class ItemFilterDaoImpl @Inject()(mongo: MongoConfig) extends ItemFilterDao {
@@ -26,15 +28,27 @@ trait ItemFilterDao {
   def findItemsByFilter(filter: Filter): Future[String] = {
       val limit = 50;
       Future {
-        var query: com.mongodb.DBObject = null
-        if (filter.in.isDefined && filter.textSearch.isDefined) {
-          query = $and(filter.in.get.what $in filter.in.get.where, "title" $eq s"(?i).*${filter.textSearch.get.what}*".r)
-        } else if (filter.in.isDefined) {
-          query = filter.in.get.what $in filter.in.get.where
-        } else if (filter.textSearch.isDefined) {
-          query = "title" $eq s"(?i).*${filter.textSearch.get.what}.*".r
-        }
-        items.find(query).limit(limit).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]")
+        val query = buildQuery(filter);
+        items.find(query).limit(limit).toList.map(obj => com.mongodb.util.JSON.serialize(obj)).mkString("[", ",", "]");
       }
+  }
+
+  def countItemsByFilter(filter: Filter): Future[Int] = {
+    Future {
+      val query = buildQuery(filter);
+      items.count(query)
+    }
+  }
+
+  def buildQuery(filter: Filter): com.mongodb.DBObject = {
+    var query: com.mongodb.DBObject = null
+    if (filter.in.isDefined && filter.textSearch.isDefined) {
+      query = $and(filter.in.get.what $in filter.in.get.where, "title" $eq s"(?i).*${filter.textSearch.get.what}*".r)
+    } else if (filter.in.isDefined) {
+      query = filter.in.get.what $in filter.in.get.where
+    } else if (filter.textSearch.isDefined) {
+      query = "title" $eq s"(?i).*${filter.textSearch.get.what}.*".r
+    }
+    query
   }
 }

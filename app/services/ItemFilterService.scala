@@ -23,4 +23,17 @@ class ItemFilterService @Inject()(itemFilterDao: ItemFilterDao) {
 
     itemFilterDao.findItemsByFilter(Filter(in, textSearch))
   }
+
+  def countItemsByFilter(filterJson: play.api.libs.json.JsValue): Future[Int] = {
+    val in: Option[In] = (filterJson \ "category").asOpt[Array[String]] match {
+      case Some(e) => Some(In("category", e))
+      case None => None
+    }
+    val textSearch: Option[TextSearch] = (filterJson \ "search").asOpt[String] match {
+      case Some(e) => Some(TextSearch(e))
+      case None => None
+    }
+
+      itemFilterDao.countItemsByFilter(Filter(in, textSearch))
+  }
 }

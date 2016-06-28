@@ -12,4 +12,8 @@ class ItemFilterController @Inject()(itemService: ItemService, itemFilterService
   def itemsFindByFilterAsJson = Action.async(parse.tolerantJson) {
     implicit request => itemFilterService.findItemsByFilter(request.body).map((json: String) => Ok(json).as("application/json"))
   }
+
+  def itemsCountByFilterAsJson = Action.async(parse.tolerantJson) {
+    implicit request => itemFilterService.countItemsByFilter(request.body).map((json: Int) => Ok(json toString).as("application/json"))
+  }
 }

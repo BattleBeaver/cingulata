@@ -1,18 +1,17 @@
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                               @controllers.Assets.at(path="/public", file)
 
-# Home page, sign up, sign in
+GET 		     /  											                  @controllers.Assets.at(path="/public", file="html/index/index.html")
 
-GET 		/  											                        @controllers.Assets.at(path="/public", file="html/index/index.html")
+#GET         /favicon.ico                               @controllers.Assets.at(path="/public/images", file="cng.ico")
 
-#GET     /favicon.ico                                    @controllers.Assets.at(path="/public/images", file="cng.ico")
-
-GET 		/items/  								                        @controllers.Assets.at(path="/public", file="html/items/items_collection.html")
-GET 		/items/index  								                  @controllers.Assets.at(path="/public", file="html/items/items.html")
+GET 		     /items/  								                  @controllers.Assets.at(path="/public", file="html/items/items_collection.html")
+GET 		     /items/index  								              @controllers.Assets.at(path="/public", file="html/items/items.html")
 
 #filters
-POST         /item/find                                  @controllers.ItemFilterController.itemsFindByFilterAsJson
+POST         /item/find                                 @controllers.ItemFilterController.itemsFindByFilterAsJson
+POST         /item/count                                @controllers.ItemFilterController.itemsCountByFilterAsJson
 
-->          /admin                                        admin.Routes
+->           /admin                                     admin.Routes
 
-->          /stats                                        stats.Routes
+->           /stats                                     stats.Routes
