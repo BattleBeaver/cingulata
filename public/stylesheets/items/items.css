@@ -169,7 +169,7 @@ a:hover {
     width: 217px;
     margin-right: 13px;
     margin-bottom: 13px;
-    height: 320px;
+    height: 340px;
     background: #FFFFFF;
     z-index: 0;
 }
@@ -526,12 +526,15 @@ a.button.red {
     top : 0;
 }
 .pager {
-	width:30px;
-	height:30px;
+	padding-top: 5px;
+	width: 30px;
+	height: 30px;
 	text-align: center;
 	position: fixed;
-	top: 75%;
-	left:95%;
+	top: 90%;
+	left: 95%;
+	background-color: #41307C;
+	color: white;
 	/*display: none;*/
-	border: 1px solid red;
+	border: 1px solid #41307C;
 }
