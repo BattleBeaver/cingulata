@@ -1,20 +1,10 @@
 var page = 1;
 var block = false;
+
 function addNewEntry() {
   var filter = document.querySelector(".cd-filter-trigger");
   var items = document.querySelector(".cd-gallery");
   var filterVisible = document.querySelector(".filter-is-visible");
- //  filter.style.left = "0";
- //  filter.innerHTML = "";
- //  if (this.pageYOffset === 0) {
- //    filter.style.left = "2%";
- //    filter.innerHTML = "FILTERS";
- //    filter.style.backgroundColor = "transparent";
- //    // console.log(items.classList.contains("filter-is-visible"));
- //    if (items.classList.contains("filter-is-visible")) {
- //      filter.style.backgroundColor = "transparent";
- //    }
- // }
     var items = document.querySelector(".cd-gallery");
     var result = parseInt(items.clientHeight) - parseInt(this.pageYOffset);
     if (result < window.innerHeight && !block) {
@@ -41,7 +31,6 @@ function addNewEntry() {
   * Loading items into grid.
   */
   cng.item.load = function(query) {
-    // gallery.innerHTML = "";
     $.ajax({
       contentType: 'application/json',
       data: JSON.stringify(query),
@@ -75,11 +64,6 @@ function addNewEntry() {
         summarySearch.innerText = data+" "+"items found";
         summarySearch.style.color = "#41307C";
         summarySearch.style.fontSize = "12px";
-        // summarySearch.style.border = "1px solid #41307C"
-        // summarySearch.style.marginBottom = "1em";
-
-
-
       },
       error: function(){
           console.error("Error cng.item.count");
@@ -116,8 +100,6 @@ function addNewEntry() {
       create(list[i]);
     }
     };
-
-
 
   /**
   * Processes item's object.
@@ -312,10 +294,7 @@ function addNewEntry() {
     refreshBlock.obj.addEventListener("click", function(ev) {
       cng.item.count(cng.filters.query);
       var a = document.createElement("div");
-      a.classList.add("summary");
-      // var b = document.querySelector(".cd-filter .filter-is-visible:before")
-      // var summarySearch = document.querySelector(".summary");
-      // summarySearch.style.display = "block";
+      a.classList.add("summary");;
       cng.filters.applyAndLoad();
     });
 
@@ -374,9 +353,7 @@ function addNewEntry() {
         this.innerHTML = "show all";
       });
       summarySearch.addEventListener("mouseleave", function() {
-        // cng.item.count(this.query);
         cng.item.count(that.query);
-        //console.log(temporaryCount);
       });
     },
 
@@ -399,27 +376,14 @@ function addNewEntry() {
       elementsToTrigger.each(function(){
         $(this).toggleClass('filter-is-visible');
       });
-    // triggerFilter(true);
     this.style.backgroundColor = "transparent";
   });
   $('.filter-is-visible').on('click', function(){
     alert("vf")
-    // $(this).toggleClass('filter-is-visible');
-    // triggerFilter(true);
     this.style.backgroundColor = "transparent";
   });
   $('.cd-filter .cd-close').on('click', function(){
-    // triggerFilter(false);
   });
-
-  // function triggerFilter($bool) {
-  //   var elementsToTrigger = $([$('.cd-filter-trigger'), $('.cd-filter'), $('.cd-tab-filter'), $('.cd-gallery')]);
-  //   elementsToTrigger.each(function(){
-  //     $(this).toggleClass('filter-is-visible', $bool);
-  //   });
-  // }
-
-  //close filter dropdown inside lateral .cd-filter
   $('.cd-filter-block h4').on('click', function(){
     $(this).toggleClass('closed').siblings('.cd-filter-content').slideToggle(300);
   })
