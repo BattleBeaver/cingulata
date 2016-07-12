@@ -1,4 +1,4 @@
-var page = 1;
+var page = 0;
 var block = false;
 
 function addNewEntry() {
@@ -345,7 +345,7 @@ function addNewEntry() {
       var summarySearch = document.querySelector(".summary");
       var that = this;
       var temporaryCount = cng.item.count(this.query);
-      page = 1;
+      page = 0;
       block = false;
       cng.item.clearGrid();
       cng.item.load(this.query);
