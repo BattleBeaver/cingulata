@@ -1,15 +1,227 @@
-@(scripts: Html = Html(""), styles: Html = Html(""))(content: Html = Html(""))
-<!doctype html>
-<html lang="en" class="no-js">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	@styles
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width-device-width, initial-scale = 1.0"/>
+    <title>Admin Cingulata</title>
+    <link rel="stylesheet" href="style/style.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <div id="page-wrapper">
+      <!----- HEADER SECTION -------->
+      <div id="header-wrap">
+        <header>
+          <nav>
+            <div id="search">
+              <i class="glyphicon glyphicon-search"></i>
+              <input type="text" name="name" value="Search...">
+            </div>
+            <div id="nav-right">
+              <ul>
+                <!-- notify -->
+                <li>
+                  <i class="glyphicon glyphicon-bell"></i>
+                </li>
+                <!-- loading data -->
+                <li>
+                  <i class="glyphicon glyphicon-cloud-upload"></i>
+                </li>
+                <!-- settings -->
+                <li>
+                  <i class="glyphicon glyphicon-cog"></i>
+                </li>
+                <!-- user profile -->
+                <li>
+                  <img src="" alt="" />
+                </li>
+                <!-- user profile dropdown -->
+                <li id="user-profile-dropdown">
+                  <img src="images/Max.jpg" alt="" width="50px" height="40px" />
+                  <i class="glyphicon glyphicon-menu-down"></i>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+      </div>
+      <!--------- PAGE SIDEBAR -------->
+      <div id="page-sidebar">
+        <div class="container">
+          <section id="logo">
+            CINGULATA
+          </section>
+          <div id="sidebar-top">
+            <ul>
+              <li>
+                <a href="#">
+                  <img src="" alt="" />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="" alt="" />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="" alt="" />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="" alt="" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div id="sidebar-nemu">
+            <ul>
+              <li>
+                <a href="#">
+                  <i class="glyph-icon icon-linecons-shop"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i></i>
+                  <span>Dashboard</span>
+                  <span class="glyphicons glyphicons-star-empty"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="sidebar-files">
 
-	@scripts
-	<title>Cingulata | Admin</title>
-</head>
-<body>
-	@content
-</body>
+          </div>
+          <ul>
+
+          </ul>
+        </div>
+      </div>
+    <!-------- CONTENT PAGE ----------->
+      <div id ="page-content-wrapper">
+        <nav id="page-nav">
+          <div id="setting-dropdown-button">
+
+          </div>
+        </div>
+        <div id="page-content">
+          <section id="overview">
+            <!-- SENT EMAIL -->
+            <div id = "overwiew-email">
+              <header>
+                Sent emails
+              </header>
+              <main>
+                <!-- icon -->
+                <i class=""></i>
+                <div class="title-content">
+                  <!-- icon triangle -->
+                  <i></i>
+                  185
+                  <small>
+                    <!-- small icon triangle -->
+                    <i></i>
+                     +7,6% email list penetration
+                  </small>
+                </div>
+              </main>
+              <span class="caption">
+                <a href="#"> view details</a>
+                <!-- icon for transitions -->
+                <i></i>
+              </span>
+            </div>
+            <!-- CLOUD DOWNLOADS -->
+            <div id = "overwiew-cloud">
+              <header>
+                Cloud downloads
+              </header>
+              <main>
+                <!-- icon -->
+                <i class="glyphicon glyphicon-cloud"></i>
+                <div class="title-content">
+                  <!-- icon triangle -->
+                  <i></i>
+                  6.52k
+                  <small>
+                    <!-- small icon triangle -->
+                    <i></i>
+                     +76% have started the download
+                  </small>
+                </div>
+              </main>
+              <span class="caption">
+                <a href="#"> view details</a>
+                <!-- icon for transitions -->
+                <i></i>
+              </span>
+            </div>
+            <!-- SALES FROM LAST VISIT -->
+            <div id = "overwiew-sales">
+              <header>
+                Sales from your last visit
+              </header>
+              <main>
+                <!-- icon -->
+                <i class=""></i>
+                <div class="title-content">
+                  <!-- icon triangle -->
+                  <i></i>
+                  1.2k
+                  <small>
+                    <!-- small icon triangle -->
+                    <i></i>
+                     $294 daily revenue from all sales
+                  </small>
+                </div>
+              </main>
+              <span class="caption">
+                <a href="#"> view details</a>
+                <!-- icon for transitions -->
+                <i></i>
+              </span>
+            </div>
+          </section>
+          <section id="statistics">
+            <header>
+              <h3>Server statistics</h3>
+              <small>(The Ultimate Admin template)</small>
+              <div class="statistic-button">
+                <a href="#">
+                  <input type="radio" name="name" value=""> Weekly
+                </a>
+                <a href="#">
+                  <input type="radio" name="name" value=""> Monthly
+                </a>
+                <a href="#">
+                  <input type="radio" name="name" value=""> Yearly
+                </a>
+              </div>
+            </header>
+            <main>
+              Need plugin or smth
+            </main>
+          </section>
+          <aside class="social">
+            <div class="social-facebook">
+            </div>
+            <div class="social-twitter">
+            </div>
+          </aside>
+        </div>
+      </div>
+  </div>
+  </body>
 </html>

@@ -1,0 +1,80 @@
+/*css reset*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+li{
+  list-style: none;
+}
+#page-wrapper{
+  max-width: 1150;
+}
+
+/*------------HEADER----------------*/
+#header-wrap{
+  position: relative;
+  left: 120px;
+  width: 100%;
+  padding: 10px;
+}
+#header-wrap nav{
+  display: flex;
+}
+#header-wrap ul{
+  display: flex;
+  position: absolute;
+  right: 0;
+}
+#header-wrap ul li{
+  margin-right: 10px;
+}
+#nav-right{
+  display: inline-block;
+}
+#search{
+
+}
+#search input{
+  width: 100px;
+  padding-left:18px;
+}
+#search i{
+  position: absolute;
+  top: 15px;
+}
+#nav-right i{
+  font-size: x-large;
+  color:rgba(0,0,0,0.6);
+}
+#user-profile-dropdown i{
+  font-size: medium;
+}
+
+/*-----------------PAGE SIDEBAR-----------------*/
+#page-sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+
+}
+#page-content{
+  position: relative;
+  left: 120px;;
+  width: 100%;
+}
