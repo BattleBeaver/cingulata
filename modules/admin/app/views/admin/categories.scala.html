@@ -1,15 +1,6 @@
 @(categories: Seq[String])
-@scripts = {
-	<script src="@controllers.admin.routes.Assets.at("javascripts/editablejs/editable.js")" charset="utf-8"></script>
-	<script src="@controllers.admin.routes.Assets.at("javascripts/cng.main.js")" charset="utf-8"></script>
+<ul>
+@for(category <- categories) {
+	<li class="edit">@category</li>
 }
-@styles = {
-	<link rel="stylesheet"  media="screen"  href="@controllers.admin.routes.Assets.at("stylesheets/editablejs/editable.css")">
-}
-@admin_nav(scripts, styles) {
-	<ul>
-	@for(category <- categories) {
-		<li class="edit">@category</li>
-	}
-	</ul>
-}
+</ul>

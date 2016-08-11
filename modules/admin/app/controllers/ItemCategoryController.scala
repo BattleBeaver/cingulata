@@ -17,16 +17,6 @@ class ItemCategoryController @Inject()(
                                         val messagesApi: MessagesApi) extends Controller {
 
   /**
-   * Returns merged categories template
-   * @return merged categories page template.
-   */
-  def categories = Action.async {
-      implicit request => {
-        itemService.allCategories.map((categories: Seq[String]) => Ok(views.html.admin.categories(categories)))
-      }
-  }
-
-  /**
    * Updates category. Inserts new key-value pair in admin.
    * @param oldName: String - old name of category.
    * @param newName: String - new name of category.

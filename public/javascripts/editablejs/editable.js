@@ -66,6 +66,4 @@
         li.appendChild(button);
       }
     }
-
-    window.addEventListener("load", cng.editable.init, false);
   })();

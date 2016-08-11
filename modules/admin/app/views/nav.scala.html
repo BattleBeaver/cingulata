@@ -3,7 +3,34 @@
   <head>
     <meta name="viewport" content="width-device-width, initial-scale = 1.0"/>
     <title>Admin Cingulata</title>
-    <link rel="stylesheet" href="style/style.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="admin/assets/stylesheets/style.css" media="screen" title="no title" charset="utf-8">
+    <script src="admin/assets/javascripts/cng.main.js"></script>
+    <script src="@controllers.admin.routes.Assets.at("javascripts/editablejs/editable.js")" charset="utf-8"></script>
+    <script src="@controllers.admin.routes.Assets.at("javascripts/cng.main.js")" charset="utf-8"></script>
+    <link rel="stylesheet" media="screen" href="@controllers.admin.routes.Assets.at("stylesheets/editablejs/editable.css")">
+
+    <script>
+      window.onload = function() {
+        document.getElementById("page-sidebar").addEventListener("click", function() {
+          if (event.target.tagName == "SPAN") {
+
+            if (event.target.id == "categories") {
+              cng.ajax.get("admin/categories", function(xhr) {
+                document.getElementById("page-content").innerHTML = xhr.response;
+                cng.editable.init();
+              });
+
+            } else if (event.target.id == "crawlers") {
+              cng.ajax.get("admin/crawlers", function(xhr) {
+                document.getElementById("page-content").innerHTML = xhr.response;
+                cng.editable.init();
+              });
+            }
+
+          }
+        })
+      }
+    </script>
   </head>
   <body>
     <div id="page-wrapper">
@@ -43,7 +70,6 @@
           </nav>
         </header>
       </div>
-      <!--------- PAGE SIDEBAR -------->
       <div id="page-sidebar">
         <div class="container">
           <section id="logo">
@@ -83,14 +109,14 @@
               <li>
                 <a href="#">
                   <i></i>
-                  <span>Dashboard</span>
+                  <span id="categories">Categories</span>
                   <span class="glyphicons glyphicons-star-empty"></span>
                 </a>
               </li>
               <li>
                 <a href="#">
                   <i></i>
-                  <span>Dashboard</span>
+                  <span id="crawlers">Manage Crawlers</span>
                 </a>
               </li>
               <li>
