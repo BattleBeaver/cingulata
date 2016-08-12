@@ -7,3 +7,6 @@ GET        /categories                                   @controllers.admin.Admi
 GET        /crawlers                                   @controllers.admin.AdminController.crawlers
 GET        /crawler-details                                   @controllers.admin.AdminController.crawlerDetails
 PUT         /categories/modify/:oldName/:newName         @controllers.admin.ItemCategoryController.updateCategory(oldName: String, newName: String)
+
+#crawlers
+POST        /crawlers/create                                   @controllers.admin.CrawlerController.create
