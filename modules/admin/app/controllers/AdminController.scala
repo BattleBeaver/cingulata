@@ -37,4 +37,14 @@ class AdminController @Inject()(categoryMappingService: CategoryMappingService, 
           Ok(views.html.admin.crawlers())
         }
     }
+
+   /**
+    * Returns merged categories template
+    * @return merged categories page template.
+    */
+    def crawlerDetails = Action {
+        implicit request => {
+          Ok(views.html.admin.crawlerDetails())
+        }
+    }
 }

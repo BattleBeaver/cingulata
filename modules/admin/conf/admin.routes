@@ -5,4 +5,5 @@ GET         /assets/*file                                @controllers.admin.Asse
 GET         /                                            @controllers.admin.AdminController.index
 GET        /categories                                   @controllers.admin.AdminController.categories
 GET        /crawlers                                   @controllers.admin.AdminController.crawlers
+GET        /crawler-details                                   @controllers.admin.AdminController.crawlerDetails
 PUT         /categories/modify/:oldName/:newName         @controllers.admin.ItemCategoryController.updateCategory(oldName: String, newName: String)

@@ -78,3 +78,13 @@ li{
   left: 120px;;
   width: 100%;
 }
+#page-content label{
+	text-align: center;
+}
+#page-content input{
+	display: flex;
+}
+#site-name{
+	font-weight: bold;
+	font-size: 18px;
+}
