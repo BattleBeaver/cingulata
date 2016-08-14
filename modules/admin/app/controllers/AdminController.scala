@@ -7,10 +7,11 @@ import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc._
 import services.{CategoryMappingService, ItemService}
 
+import daos.CrawlerDao
 /**
   * Created by kuzmentsov@gmail.com
   */
-class AdminController @Inject()(categoryMappingService: CategoryMappingService, itemService: ItemService) extends Controller {
+class AdminController @Inject()(crawlerDao: CrawlerDao, categoryMappingService: CategoryMappingService, itemService: ItemService) extends Controller {
 
   def index = Action {
     implicit request => {
@@ -34,7 +35,8 @@ class AdminController @Inject()(categoryMappingService: CategoryMappingService, 
     */
     def crawlers = Action {
         implicit request => {
-          Ok(views.html.admin.crawlers())
+          var list = crawlerDao.findAll()
+          Ok(views.html.admin.crawlers.render(list))
         }
     }
 

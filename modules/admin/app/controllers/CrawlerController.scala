@@ -11,10 +11,12 @@ import services.{CategoryMappingService, ItemService}
 
 import models._
 
+import daos.CrawlerDao
+
 /**
   * Created by kuzmentsov@gmail.com
   */
-class CrawlerController extends Controller {
+class CrawlerController @Inject()(crawlerDao: CrawlerDao) extends Controller {
 
   /**
    * Returns merged categories template
@@ -23,7 +25,8 @@ class CrawlerController extends Controller {
   def create = Action {
     implicit request => {
       val crawlerFormData = crawlerForm.bindFromRequest.get
-      Ok(crawlerFormData.toString)
+      crawlerDao.create(crawlerFormData)
+      Ok("created")
     }
   }
 
