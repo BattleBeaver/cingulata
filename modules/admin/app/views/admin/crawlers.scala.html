@@ -1,26 +1,30 @@
 @(crawlers: Seq[Crawler])
-<style>
-table, th, td {
-    border: 1px solid black;
-}
-</style>
+
 <table>
-  <tr>
-    <th>Id</th>
-    <th>Host</th>
-    <th>URL</th>
-    <th>Last Run</th>
-    <th>Modify</th>
-    <th>Run</th>
-  </tr>
-  @for(crawler <- crawlers) {
-  <tr>
-    <td>@crawler.id</td>
-    <td>@crawler.host</td>
-    <td>@crawler.contextRoot</td>
-    <td>10-Aug-2016 <font color="darkyellow">(2 day(s) ago)</font></td>
-    <td>pencil</td>
-    <td>play</td>
-  </tr>
-  }
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Host</th>
+      <th>URL</th>
+      <th>Last Run</th>
+      <th>Modify</th>
+      <th>Run</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(crawler <- crawlers) {
+    <tr>
+      <td>@crawler.id</td>
+      <td>@crawler.host</td>
+      <td>@crawler.contextRoot</td>
+      <td>10-Aug-2016 <font color="darkyellow">(2 day(s) ago)</font></td>
+      <td>&#128393;</td>
+      <td>&#9658;</td>
+      <td onclick="deleteCrawler('@crawler.id')">&#x2718;</td>
+    </tr>
+    }
+  </tbody>
+
+
 </table>

@@ -13,11 +13,14 @@ import scala.collection.JavaConversions._
 
 import models._
 
+import org.bson.types.ObjectId
+
 /**
   * Created by kuzmentsov@gmail.com
  */
 @ImplementedBy(classOf[CrawlerDaoImpl]) trait CrawlerDao {
   def create(crawler: Crawler): Unit
+  def delete(crawlerId: String): Unit
   def findAll(): List[Crawler]
 }
 
@@ -32,6 +35,13 @@ import models._
 
   def findAll(): List[Crawler] = {
     crawlers.find().toList.map(x => mongoObject2Crawler(x.asInstanceOf[BasicDBObject]))
+  }
+
+  def delete(crawlerId: String): Unit = {
+    Future {
+      val query = MongoDBObject("_id" -> new ObjectId(crawlerId))
+      crawlers.findAndRemove(query)
+    }
   }
 
   /**

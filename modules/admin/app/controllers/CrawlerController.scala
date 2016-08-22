@@ -7,16 +7,16 @@ import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import services.{CategoryMappingService, ItemService}
+
+import services.CrawlerService
 
 import models._
-
-import daos.CrawlerDao
+import akka.actor._
 
 /**
   * Created by kuzmentsov@gmail.com
   */
-class CrawlerController @Inject()(crawlerDao: CrawlerDao) extends Controller {
+class CrawlerController @Inject()(crawlerService: CrawlerService) extends Controller {
 
   /**
    * Returns merged categories template
@@ -25,33 +25,54 @@ class CrawlerController @Inject()(crawlerDao: CrawlerDao) extends Controller {
   def create = Action {
     implicit request => {
       val crawlerFormData = crawlerForm.bindFromRequest.get
-      crawlerDao.create(crawlerFormData)
-      Ok("created")
+      crawlerService.create(crawlerFormData)
+      Ok("Created")
+    }
+  }
+
+  /**
+   * Deletes crawler with a specified id
+   */
+  def delete(crawlerId: String) = Action {
+    implicit request => {
+      crawlerService.delete(crawlerId)
+      Ok("Deleted")
+    }
+  }
+
+  /**
+  * Verifies Crawler's settings if they are properly configured.
+  * @return Future of message.
+  */
+  def verifyCrawler = Action.async {
+    val result = crawlerService.verifyCrawler();
+    result map {
+      x => Ok(x)
     }
   }
 
   val crawlerForm = Form(
-  mapping(
-    "id" -> optional(text),
-    "host" -> text,
-    "context-root" -> text,
-    "itemPageExtraParam" -> text,
-    "selector" -> mapping(
-      "nav-component" -> text,
-      "link-to-item" -> text,
-      "pagings" -> text
-    )(Selector.apply)(Selector.unapply),
-    "itemSelector" -> mapping(
-      "title" -> text,
-      "price" -> text,
-      "category" -> text,
-      "subcategory" -> text,
-      "imageSrc" -> text,
-      "featuresSelector" -> mapping(
-        "name" -> text,
-        "value" -> text
-      )(FeaturesSelector.apply)(FeaturesSelector.unapply)
-    )(ItemSelector.apply)(ItemSelector.unapply)
-  )(Crawler.apply)(Crawler.unapply)
-)
+    mapping(
+      "id" -> optional(text),
+      "host" -> text,
+      "context-root" -> text,
+      "itemPageExtraParam" -> text,
+      "selector" -> mapping(
+        "nav-component" -> text,
+        "link-to-item" -> text,
+        "pagings" -> text
+      )(Selector.apply)(Selector.unapply),
+      "itemSelector" -> mapping(
+        "title" -> text,
+        "price" -> text,
+        "category" -> text,
+        "subcategory" -> text,
+        "imageSrc" -> text,
+        "featuresSelector" -> mapping(
+          "name" -> text,
+          "value" -> text
+        )(FeaturesSelector.apply)(FeaturesSelector.unapply)
+      )(ItemSelector.apply)(ItemSelector.unapply)
+    )(Crawler.apply)(Crawler.unapply)
+  )
 }

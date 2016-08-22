@@ -19,3 +19,5 @@ libraryDependencies += "org.scalamock" %% "scalamock-scalatest-support" % "3.2.2
 
 //Mailer plugin
 libraryDependencies += "com.typesafe.play" %% "play-mailer" % "3.0.1"
+
+libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.3.4"

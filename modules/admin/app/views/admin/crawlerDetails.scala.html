@@ -1,28 +1,45 @@
 <form action="/admin/crawlers/create" method="POST">
+  <span id="site-name" style="font-weight:bold">Allo</span>
     <div class="crawler-details">
-        <p id="site-name" style="font-weight:bold">Allo</p>
+      <section class="crawler-main">
         <label for="host"> Host </label><input type="text" name="host" value=""><br/>
-        <label for="context-root"> Context Root</label><input type="text" name="context-root" value=""><br/>
+        <label for="contextRoot"> Context Root</label><input type="text" name="contextRoot" value=""><br/>
         <label for="itemPageExtraParam"> Item Page Extra Param</label><input type="text" name="itemPageExtraParam" value=""> <br/>
-        <p>
-            Selectors:
-        </p>
-        <label for="selector.nav-component"> Navigation component</label><input type="text" name="selector.nav-component" value=""><br/>
-        <label for="selector.link-to-item"> Link to item </label><input type="text" name="selector.link-to-item" value=""><br/>
-        <label for="selector.pagings">pagings </label><input type="text" name="selector.pagings" value=""><br/>
-        <p>
-            Item selectors:
-        </p>
-        <label for="itemSelector.title">Title </label><input type="text" name="itemSelector.title" value=""><br/>
-        <label for="itemSelector.price">Price </label><input type="text" name="itemSelector.price" value=""><br/>
-        <label for="itemSelector.category">Caregory </label><input type="text" name="itemSelector.category" value=""><br/>
-        <label for="itemSelector.subcategory">Subcaregory </label><input type="text" name="itemSelector.subcategory" value=""><br/>
-        <label for="itemSelector.imageSrc">Images Source </label><input type="text" name="itemSelector.imageSrc" value=""><br/>
-        <p>
-            Features:
-        </p>
-        <label for="itemSelector.featuresSelector.name">name </label><input type="text" name="itemSelector.featuresSelector.name" value=""><br/>
-        <label for="itemSelector.featuresSelector.value">Value </label><input type="text" name="itemSelector.featuresSelector.value" value=""><br/>
+      </section>
+        <section class="crawler-selectors">
+          <p>
+              Selectors:
+          </p>
+          <label for="selector.navComponent"> Navigation component</label><input type="text" name="selector.navComponent" value=""><br/>
+          <label for="selector.linkToItem"> Link to item </label><input type="text" name="selector.linkToItem" value=""><br/>
+          <label for="selector.pagings">pagings </label><input type="text" name="selector.pagings" value=""><br/>
+
+        </section>
+        <section class="crawler-item-selectors">
+          <p>
+              Item selectors:
+          </p>
+          <label for="itemSelector.title">Title </label><input type="text" name="itemSelector.title" value=""><br/>
+          <label for="itemSelector.price">Price </label><input type="text" name="itemSelector.price" value=""><br/>
+          <label for="itemSelector.category">Caregory </label><input type="text" name="itemSelector.category" value=""><br/>
+          <label for="itemSelector.subcategory">Subcaregory </label><input type="text" name="itemSelector.subcategory" value=""><br/>
+          <label for="itemSelector.imageSrc">Images Source </label><input type="text" name="itemSelector.imageSrc" value=""><br/>
+        </section>
+        <section class="crawler-features">
+          <p>
+              Features:
+          </p>
+          <label for="itemSelector.featuresSelector.name">name </label><input type="text" name="itemSelector.featuresSelector.name" value=""><br/>
+          <label for="itemSelector.featuresSelector.value">Value </label><input type="text" name="itemSelector.featuresSelector.value" value=""><br/>
+        </section>
     </div>
-		<input type="submit"></submit>
+    <section class="crawler-submit">
+      <span>
+        <input type="submit"></submit>
+      </span>
+      <span>
+        <input type="button" id="test-crawler" onclick="verifyCrawler()" value="Test It"/>
+      </span>
+    </section>
+
 </form>

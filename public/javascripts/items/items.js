@@ -1,19 +1,29 @@
 var page = 0;
 var block = false;
 
+// Scroll and loading new items
 function addNewEntry() {
   var filter = document.querySelector(".cd-filter-trigger");
   var items = document.querySelector(".cd-gallery");
   var filterVisible = document.querySelector(".filter-is-visible");
-    var items = document.querySelector(".cd-gallery");
-    var result = parseInt(items.clientHeight) - parseInt(this.pageYOffset);
-    if (result < window.innerHeight && !block) {
-      page++;
-      var pager = document.querySelector(".pager");
-      pager.innerHTML = page;
-      block = true;
-      cng.item.load(cng.filters.query);
-}
+  var lastItems = document.querySelector(".lastItems");
+    if (items.clientHeight < 700) {
+      var pos = lastItems.getBoundingClientRect().top;
+      if (pos < 500 && !block) {
+        // block = true;
+          cng.item.load(cng.filters.query);
+      }
+    }
+    else {
+      var result = parseInt(items.clientHeight) - parseInt(this.pageYOffset);
+      if (result < window.innerHeight && !block) {
+        page++;
+        var pager = document.querySelector(".pager");
+        pager.innerHTML = page;
+        block = true;
+        cng.item.load(cng.filters.query);
+  }
+    }
 };
 
 (function() {
@@ -95,20 +105,34 @@ function addNewEntry() {
       window.removeEventListener("scroll", addNewEntry);
       return false;
     }
-    console.log(response.length);
     for (var i = 0; i < list.length; i++) {
-      create(list[i]);
+      create(list[i],list[list.length-1]._id.$oid);
+
     }
+    var lastItems = list[list.length-1];
     };
 
   /**
   * Processes item's object.
   * @var item {Object}
   */
-  function create(item) {
+  function create(item,lastItems) {
+
+    console.log(lastItems);
     var itemLi = document.createElement("li");
     itemLi.style.display = 'none';
     itemLi.className = "item";
+    if (lastItems) {
+      if (item._id.$oid === lastItems) {
+        var li = document.querySelectorAll("li")
+        for (var i = 0; i < li.length; i++) {
+          console.log(li[i]);
+          li[i].classList.remove("lastItems");
+        }
+        itemLi.classList.add("lastItems");
+      }
+    }
+
 
     var itemInnerDiv = document.createElement("div");
     itemInnerDiv.className = "item-inner";

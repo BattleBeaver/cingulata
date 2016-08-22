@@ -3,10 +3,11 @@ GET         /assets/*file                                @controllers.admin.Asse
 
 #categoies
 GET         /                                            @controllers.admin.AdminController.index
-GET        /categories                                   @controllers.admin.AdminController.categories
-GET        /crawlers                                   @controllers.admin.AdminController.crawlers
-GET        /crawler-details                                   @controllers.admin.AdminController.crawlerDetails
+GET         /categories                                  @controllers.admin.AdminController.categories
+GET         /crawlers                                    @controllers.admin.AdminController.crawlers
+GET         /crawler-details                             @controllers.admin.AdminController.crawlerDetails
 PUT         /categories/modify/:oldName/:newName         @controllers.admin.ItemCategoryController.updateCategory(oldName: String, newName: String)
-
+POST        /verify-crawler                              @controllers.admin.CrawlerController.verifyCrawler
 #crawlers
-POST        /crawlers/create                                   @controllers.admin.CrawlerController.create
+POST        /crawlers/create                             @controllers.admin.CrawlerController.create
+DELETE      /crawlers/:id/delete                         @controllers.admin.CrawlerController.delete(id: String)

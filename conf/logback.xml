@@ -1,5 +1,5 @@
 <configuration>
-    
+
   <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -14,6 +14,11 @@
   -->
   <logger name="play" level="INFO" />
   <logger name="application" level="DEBUG" />
+
+  <logger name="org.mongodb" level="ERROR" />
+  <logger name="com.mongodb" level="ERROR" />
+
+  <logger name="javax.mbean" level="ERROR" />
 
   <root level="DEBUG">
     <appender-ref ref="STDOUT" />

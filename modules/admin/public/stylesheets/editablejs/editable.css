@@ -1,5 +1,10 @@
+ul{
+  column-width: 400px;
+}
 .edit {
-  background-color: lightyellow;
+  background-color: #f4f7f8;
+  padding: 5px;
+  color: #0095dd;
 }
 .color{
   color:red;

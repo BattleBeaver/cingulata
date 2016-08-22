@@ -13,5 +13,3 @@ POST         /item/find                                 @controllers.ItemFilterC
 POST         /item/count                                @controllers.ItemFilterController.itemsCountByFilterAsJson
 
 ->           /admin                                     admin.Routes
-
-->           /stats                                     stats.Routes
