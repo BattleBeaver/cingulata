@@ -1,36 +1,38 @@
+@(crawler: Option[Crawler] = None)
+
 <form action="/admin/crawlers/create" method="POST">
   <span id="site-name" style="font-weight:bold">Allo</span>
     <div class="crawler-details">
       <section class="crawler-main">
-        <label for="host"> Host </label><input type="text" name="host" value=""><br/>
-        <label for="contextRoot"> Context Root</label><input type="text" name="contextRoot" value=""><br/>
-        <label for="itemPageExtraParam"> Item Page Extra Param</label><input type="text" name="itemPageExtraParam" value=""> <br/>
+        <label for="host"> Host </label><input type="text" name="host" value="@if(crawler.isDefined) {@crawler.get.host}"><br/>
+        <label for="contextRoot"> Context Root</label><input type="text" name="contextRoot" value="@if(crawler.isDefined) {@crawler.get.contextRoot}"><br/>
+        <label for="itemPageExtraParam"> Item Page Extra Param</label><input type="text" name="itemPageExtraParam" value="@if(crawler.isDefined) {@crawler.get.itemPageExtraParam}"> <br/>
       </section>
         <section class="crawler-selectors">
           <p>
               Selectors:
           </p>
-          <label for="selector.navComponent"> Navigation component</label><input type="text" name="selector.navComponent" value=""><br/>
-          <label for="selector.linkToItem"> Link to item </label><input type="text" name="selector.linkToItem" value=""><br/>
-          <label for="selector.pagings">pagings </label><input type="text" name="selector.pagings" value=""><br/>
+          <label for="selector.navComponent"> Navigation component</label><input type="text" name="selector.navComponent" value="@if(crawler.isDefined) {@crawler.get.selectors.navComponent}"><br/>
+          <label for="selector.linkToItem"> Link to item </label><input type="text" name="selector.linkToItem" value="@if(crawler.isDefined) {@crawler.get.selectors.linkToItem}"><br/>
+          <label for="selector.pagings">pagings </label><input type="text" name="selector.pagings" value="@if(crawler.isDefined) {@crawler.get.selectors.pagings }"><br/>
 
         </section>
         <section class="crawler-item-selectors">
           <p>
               Item selectors:
           </p>
-          <label for="itemSelector.title">Title </label><input type="text" name="itemSelector.title" value=""><br/>
-          <label for="itemSelector.price">Price </label><input type="text" name="itemSelector.price" value=""><br/>
-          <label for="itemSelector.category">Caregory </label><input type="text" name="itemSelector.category" value=""><br/>
-          <label for="itemSelector.subcategory">Subcaregory </label><input type="text" name="itemSelector.subcategory" value=""><br/>
-          <label for="itemSelector.imageSrc">Images Source </label><input type="text" name="itemSelector.imageSrc" value=""><br/>
+          <label for="itemSelector.title">Title </label><input type="text" name="itemSelector.title" value="@if(crawler.isDefined) {@crawler.get.itemSelector.title}"><br/>
+          <label for="itemSelector.price">Price </label><input type="text" name="itemSelector.price" value="@if(crawler.isDefined) {@crawler.get.itemSelector.price}"><br/>
+          <label for="itemSelector.category">Caregory </label><input type="text" name="itemSelector.category" value="@if(crawler.isDefined) {@crawler.get.itemSelector.category}"><br/>
+          <label for="itemSelector.subcategory">Subcaregory </label><input type="text" name="itemSelector.subcategory" value="@if(crawler.isDefined) {@crawler.get.itemSelector.subcategory}"><br/>
+          <label for="itemSelector.imageSrc">Images Source </label><input type="text" name="itemSelector.imageSrc" value="@if(crawler.isDefined) {@crawler.get.itemSelector.imageSrc}"><br/>
         </section>
         <section class="crawler-features">
           <p>
               Features:
           </p>
-          <label for="itemSelector.featuresSelector.name">name </label><input type="text" name="itemSelector.featuresSelector.name" value=""><br/>
-          <label for="itemSelector.featuresSelector.value">Value </label><input type="text" name="itemSelector.featuresSelector.value" value=""><br/>
+          <label for="itemSelector.featuresSelector.name">name </label><input type="text" name="itemSelector.featuresSelector.name" value="@if(crawler.isDefined) {@crawler.get.itemSelector.featuresSelector.name}"><br/>
+          <label for="itemSelector.featuresSelector.value">Value </label><input type="text" name="itemSelector.featuresSelector.value" value="@if(crawler.isDefined) {@crawler.get.itemSelector.featuresSelector.value}"><br/>
         </section>
     </div>
     <section class="crawler-submit">

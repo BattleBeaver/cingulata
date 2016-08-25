@@ -26,4 +26,8 @@ class CrawlerService @Inject()(crawlerDao: CrawlerDao, ws: WSClient) {
   def delete(crawlerId: String): Unit = {
     crawlerDao.delete(crawlerId)
   }
+
+  def find(crawlerId: String): Option[Crawler] = {
+    crawlerDao.find(crawlerId)
+  }
 }

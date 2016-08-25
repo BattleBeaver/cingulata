@@ -8,6 +8,8 @@ GET         /crawlers                                    @controllers.admin.Admi
 GET         /crawler-details                             @controllers.admin.AdminController.crawlerDetails
 PUT         /categories/modify/:oldName/:newName         @controllers.admin.ItemCategoryController.updateCategory(oldName: String, newName: String)
 POST        /verify-crawler                              @controllers.admin.CrawlerController.verifyCrawler
+
 #crawlers
 POST        /crawlers/create                             @controllers.admin.CrawlerController.create
 DELETE      /crawlers/:id/delete                         @controllers.admin.CrawlerController.delete(id: String)
+GET         /crawlers/:id/modify                         @controllers.admin.AdminController.modifyCrawler(id: String)

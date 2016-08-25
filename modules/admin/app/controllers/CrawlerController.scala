@@ -25,6 +25,7 @@ class CrawlerController @Inject()(crawlerService: CrawlerService) extends Contro
   def create = Action {
     implicit request => {
       val crawlerFormData = crawlerForm.bindFromRequest.get
+      println(crawlerFormData)
       crawlerService.create(crawlerFormData)
       Ok("Created")
     }
@@ -55,11 +56,11 @@ class CrawlerController @Inject()(crawlerService: CrawlerService) extends Contro
     mapping(
       "id" -> optional(text),
       "host" -> text,
-      "context-root" -> text,
+      "contextRoot" -> text,
       "itemPageExtraParam" -> text,
       "selector" -> mapping(
-        "nav-component" -> text,
-        "link-to-item" -> text,
+        "navComponent" -> text,
+        "linkToItem" -> text,
         "pagings" -> text
       )(Selector.apply)(Selector.unapply),
       "itemSelector" -> mapping(
