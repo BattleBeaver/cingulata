@@ -117,8 +117,6 @@ function addNewEntry() {
   * @var item {Object}
   */
   function create(item,lastItems) {
-
-    console.log(lastItems);
     var itemLi = document.createElement("li");
     itemLi.style.display = 'none';
     itemLi.className = "item";
@@ -126,7 +124,6 @@ function addNewEntry() {
       if (item._id.$oid === lastItems) {
         var li = document.querySelectorAll("li")
         for (var i = 0; i < li.length; i++) {
-          console.log(li[i]);
           li[i].classList.remove("lastItems");
         }
         itemLi.classList.add("lastItems");
@@ -279,136 +276,22 @@ function addNewEntry() {
 }());
 
 /**
-* Filters
-*/
+ * Toggle
+ */
 (function() {
 
-  //creates a block for refreshing gallery.
-  function createRefreshBlock() {
-    var refreshBlock = {
-      obj : null,
-
-      display : function() {
-        this.obj.style.display = "block";
-      },
-
-      hide : function() {
-        this.obj.style.display = "none";
-      },
-
-      moveTo : function(obj) {
-        obj = obj.labels.length > 0 ? obj.labels[0] : obj;
-        var _coordinates = obj.getBoundingClientRect();
-        var _top = _coordinates.top;
-        var _right = _coordinates.right;
-
-        this.obj.style.top = _top + "px";
-        this.obj.style.left = _right + 10 + "px";
-
-        this.display();
-      }
-    };
-
-    refreshBlock.obj = document.createElement("div");
-    refreshBlock.obj.classList.add("refresh-block");
-    refreshBlock.obj.classList.add("refresh-block-visible");
-    refreshBlock.hide();
-    cng.filters.form.parentNode.appendChild(refreshBlock.obj);
-
-    refreshBlock.obj.addEventListener("click", function(ev) {
-      cng.item.count(cng.filters.query);
-      var a = document.createElement("div");
-      a.classList.add("summary");;
-      cng.filters.applyAndLoad();
+    $('.cd-filter-trigger').on('click', function() {
+        var elementsToTrigger = $([$('.cd-filter-trigger'), $('.cd-filter'), $('.cd-tab-filter'), $('.cd-gallery')]);
+        elementsToTrigger.each(function() {
+            $(this).toggleClass('filter-is-visible');
+        });
+        this.style.backgroundColor = "transparent";
     });
-
-    return refreshBlock;
-  }
-
-  cng.filters = {
-    query : {},
-
-    bindTo : function(formId) {
-      var _self = this;
-
-      _self.form = document.getElementById(formId);
-      _self.form.addEventListener("change", function(ev) {
-        if (ev.srcElement.type == "checkbox") {
-          (ev.srcElement.checked ? _self.add : _self.remove).call(_self, ev.srcElement)
-        } else if (ev.srcElement.type == "search") {
-          _self.set(ev.srcElement);
-        }
-
-        _self.refreshBlock.moveTo(ev.srcElement);
-      });
-
-      _self.refreshBlock = createRefreshBlock();
-    },
-
-    add : function(element) {
-      if (!this.query[element.name]) {
-        this.query[element.name] = [];
-      }
-      this.query[element.name].push(element.value);
-    },
-
-    set : function(element) {
-      this.query[element.name] = element.value;
-    },
-
-    remove : function(element) {
-      this.query[element.name].splice(this.query[element.name].indexOf(element.id), 1);
-      if (this.query[element.name].length == 0) {
-        delete this.query[element.name]
-      }
-    },
-
-    applyAndLoad : function() {
-      var summarySearch = document.querySelector(".summary");
-      summarySearch.innerHTML = "items found";
-      var summarySearch = document.querySelector(".summary");
-      var that = this;
-      var temporaryCount = cng.item.count(this.query);
-      page = 0;
-      block = false;
-      cng.item.clearGrid();
-      cng.item.load(this.query);
-      summarySearch.addEventListener("mouseover", function() {
-        this.innerHTML = "show all";
-      });
-      summarySearch.addEventListener("mouseleave", function() {
-        cng.item.count(that.query);
-      });
-    },
-
-    count : function() {
-      cng.item.count(this.query);
-      window.addEventListener("scroll", addNewEntry, false);
-    }
-  };
-
-  cng.filters.bindTo("filters");
-}());
-
-/**
-* Toggle
-*/
-(function() {
-
-  $('.cd-filter-trigger').on('click', function(){
-      var elementsToTrigger = $([$('.cd-filter-trigger'), $('.cd-filter'), $('.cd-tab-filter'), $('.cd-gallery')]);
-      elementsToTrigger.each(function(){
-        $(this).toggleClass('filter-is-visible');
-      });
-    this.style.backgroundColor = "transparent";
-  });
-  $('.filter-is-visible').on('click', function(){
-    alert("vf")
-    this.style.backgroundColor = "transparent";
-  });
-  $('.cd-filter .cd-close').on('click', function(){
-  });
-  $('.cd-filter-block h4').on('click', function(){
-    $(this).toggleClass('closed').siblings('.cd-filter-content').slideToggle(300);
-  })
+    $('.filter-is-visible').on('click', function() {
+        this.style.backgroundColor = "transparent";
+    });
+    $('.cd-filter .cd-close').on('click', function() {});
+    $('.cd-filter-block h4').on('click', function() {
+        $(this).toggleClass('closed').siblings('.cd-filter-content').slideToggle(300);
+    })
 }());
