@@ -4,6 +4,9 @@
   <span id="site-name" style="font-weight:bold">Allo</span>
     <div class="crawler-details">
       <section class="crawler-main">
+        <p>
+            Info:
+        </p>
         <label for="host"> Host </label><input type="text" name="host" value="@if(crawler.isDefined) {@crawler.get.host}"><br/>
         <label for="contextRoot"> Context Root</label><input type="text" name="contextRoot" value="@if(crawler.isDefined) {@crawler.get.contextRoot}"><br/>
         <label for="itemPageExtraParam"> Item Page Extra Param</label><input type="text" name="itemPageExtraParam" value="@if(crawler.isDefined) {@crawler.get.itemPageExtraParam}"> <br/>
@@ -43,5 +46,4 @@
         <input type="button" id="test-crawler" onclick="verifyCrawler()" value="Test It"/>
       </span>
     </section>
-
 </form>

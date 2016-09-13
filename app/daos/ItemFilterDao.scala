@@ -13,6 +13,7 @@ import scala.concurrent.Future
 import models.filter.Filter
 
 /**
+  * Logic for Item Search By Filter
   * Created by kuzmentsov@gmail.com
  */
 @ImplementedBy(classOf[ItemFilterDaoImpl])

@@ -8,17 +8,31 @@ import play.api.test.Helpers._
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
 
-  "Application" should {
+  "HTML service" should {
 
-    "send 404 on a bad request" in new WithApplication {
-      route(FakeRequest(GET, "/boum")).get.value must beNone
-    }
-
-    "check the service is alive" in new WithApplication {
-      val home = route(FakeRequest(GET, "/")).get
+    "Send 200 on /" in new WithApplication {
+      val home = route(app, FakeRequest(GET, "/")).get
 
       status(home) must equalTo(OK)
-      contentAsBytes(home).length === 0
     }
+
+    "Send 200 on /items/index" in new WithApplication {
+      val items = route(app, FakeRequest(GET, "/items/index")).get
+
+      status(items) must equalTo(OK)
+    }
+
+    "Send 200 on /admin" in new WithApplication {
+      val admin = route(app, FakeRequest(GET, "/admin")).get
+
+      status(admin) must equalTo(OK)
+    }
+
+    "Send 404 on not found page" in new WithApplication {
+      val admin = route(app, FakeRequest(GET, "/404status")).get
+
+      status(admin) must equalTo(404)
+    }
+
   }
 }

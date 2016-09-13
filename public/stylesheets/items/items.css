@@ -432,8 +432,8 @@ a.button.red {
 	height: 30px;
 	text-align: center;
 	position: fixed;
-	top: 90%;
-	left: 95%;
+	bottom: 1em;
+	right: 1em;
 	background-color: #41307C;
 	color: white;
 	border: 1px solid #41307C;

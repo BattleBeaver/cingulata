@@ -11,7 +11,9 @@ import services.CategoryMappingService
 
 @RunWith(classOf[JUnitRunner])
 class CategoryMappingsServiceTest @Inject()(categoryMappingService: CategoryMappingService) extends Specification with MockitoSugar {
-  val categoryMapping = mock[DataMapping]
+  class MockableDataMapping extends DataMapping("from", "to")
+
+  val categoryMapping = mock[MockableDataMapping]
 
   "CategoryMappingService" should {
 
