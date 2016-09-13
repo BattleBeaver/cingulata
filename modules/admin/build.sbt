@@ -2,13 +2,9 @@ lazy val projectName = "admin"
 
 name := projectName
 
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
-
-libraryDependencies ++= Seq(jdbc, cache, ws, filters, specs2 % Test)
+libraryDependencies ++= Seq(ws, specs2 % Test)
 
 libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "1.1.0"
-
-libraryDependencies += "com.github.t3hnar" % "scala-bcrypt_2.11" % "2.5"
 
 //casbah
 libraryDependencies += "org.mongodb" %% "casbah" % "3.1.0"
