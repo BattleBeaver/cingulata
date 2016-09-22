@@ -1,9 +1,6 @@
 <h1>Cingulata - UI</h1> 
 <p>Sinker's Web Interface.</p>
-<b>Travis-CI :</b> </br>
 [![Build Status](https://travis-ci.org/BattleBeaver/cingulata.svg?branch=master)](https://travis-ci.org/BattleBeaver/cingulata)
-
-<b>Codacy :</b> </br>
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/0a58a39185b94db49c0c9bdb8017c977)](https://www.codacy.com/app/kuzmentsov/cingulata)
 
 <h1>Test Servers</h1>
